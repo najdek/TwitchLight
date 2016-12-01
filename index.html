@@ -1,0 +1,96 @@
+<html>
+<meta charset="UTF-8">
+<head>
+    <link rel="stylesheet" href="bootstrap.min.css" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="favicon.ico" type="image/ico"/>
+    <title>TwitchLight</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<style>
+		body {
+		background-color:black;
+		}
+	</style>
+</head>
+<body>
+	<div class="modal" id="changeStream" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Enter Twitch channel name</h4>
+				</div>
+				<div class="modal-body">
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">https://www.twitch.tv/</span>
+						<input type="text" class="form-control" id="twitch-name" onkeypress="return twitchNameKeyPress(event)" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onClick="openStream()" data-dismiss="modal">Open stream</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
+		<div style="padding: 0px;" class="col-md-9 col-lg-10">
+			<nav id="navbar" style="margin-bottom: 0px; height: 45px;" class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="./">TwitchLight</a>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav" role="tablist">
+							<li><a href="javascript:;" onclick="changeStream();">Change channel</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<iframe id="streamframe" style="width: 100%; height: calc(100% - 45px);" src="blank.html" frameborder="0" scrolling="no"></iframe>
+		</div>
+		<div style="padding: 0px;" class="col-md-3 col-lg-2">
+			<iframe id="chatframe" style="width: 100%; height: 100%;" src="blank.html" frameborder="0" scrolling="no"></iframe>
+		</div>
+	</div>
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	if(window.location.hash) {
+		var hash = window.location.hash.substring(1);
+		document.getElementById("streamframe").setAttribute("src","https://player.twitch.tv/?channel=" + hash);
+		document.getElementById("chatframe").setAttribute("src","https://www.twitch.tv/" + hash + "/chat?popout=");
+		document.title=hash + ' - TwitchLight';
+		document.getElementById("twitch-name").value = hash;
+	} else {
+		$('#navbar').hide();
+		$('#changeStream').modal({
+		show:true,
+		backdrop:'static',
+		keyboard:false
+		});
+	}
+}, false);
+
+function changeStream() {
+	document.getElementById("changeStream").setAttribute("data-backdrop","a");
+	$('#changeStream').removeData('bs.modal').modal({keyboard: true});
+}
+	
+function openStream() {
+	var twitchName = document.getElementById("twitch-name").value;
+	document.getElementById("streamframe").setAttribute("src","https://player.twitch.tv/?channel=" + twitchName);
+	document.getElementById("chatframe").setAttribute("src","https://www.twitch.tv/" + twitchName + "/chat?popout=");
+	$('#navbar').show();
+	$('#changeStream').modal('hide');
+	document.title=twitchName + ' - TwitchLight';
+	window.location.hash = twitchName;
+}
+
+function twitchNameKeyPress(e) {
+	if (e.keyCode == 13) {
+		openStream();
+		$('#changeStream').modal('hide');
+	}
+}
+</script>
+</html>
