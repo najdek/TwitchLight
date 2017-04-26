@@ -7,7 +7,7 @@
     <title>TwitchLight</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+	<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 	<style>
 		body {
 		background-color:black;
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById("chatframe").setAttribute("src","https://www.twitch.tv/" + hash + "/chat?popout=");
 		document.title=hash + ' - TwitchLight';
 		document.getElementById("twitch-name").value = hash;
-		document.getElementById("navbar-brand").setAttribute("href","http://twitch.najdek.me/#" + hash);
+		document.getElementById("navbar-brand").setAttribute("href","https://twitch.najdek.me/#" + hash);
 		document.getElementById("navbar-brand").innerHTML = hash;
 	} else {
 		$('#navbar').hide();
@@ -93,7 +93,7 @@ function openStream() {
 	$('#changeStream').modal('hide');
 	document.title=twitchName + ' - TwitchLight';
 	window.location.hash = twitchName;
-	document.getElementById("navbar-brand").setAttribute("href","http://twitch.najdek.me/#" + twitchName);
+	document.getElementById("navbar-brand").setAttribute("href","https://twitch.najdek.me/#" + twitchName);
 		document.getElementById("navbar-brand").innerHTML = twitchName;
 }
 function twitchNameKeyPress(e) {
