@@ -77,11 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		backdrop:'static',
 		keyboard:false
 		});
+		document.getElementById("twitch-name").select();
 	}
 }, false);
 function changeStream() {
 	document.getElementById("changeStream").setAttribute("data-backdrop","a");
 	$('#changeStream').removeData('bs.modal').modal({keyboard: true});
+	document.getElementById("twitch-name").select();
 }
 	
 function openStream() {
