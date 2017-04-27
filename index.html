@@ -99,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 }, false);
 function changeStream() {
+	var hash = window.location.hash.substring(1);
+	document.getElementById("twitch-name").value = hash;
 	document.getElementById("changeStream").setAttribute("data-backdrop","a");
 	$('#changeStream').removeData('bs.modal').modal({keyboard: true});
 	document.getElementById("twitch-name").select();
